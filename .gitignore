@@ -1,3 +1,5 @@
 *.sb
 *.cmi
 *.cmo
+.DS_Store
+.vscode
