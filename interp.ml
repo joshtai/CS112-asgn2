@@ -87,11 +87,12 @@ let interp_print (print_list : Absyn.printable list) =
 let interp_input (memref_list : Absyn.memref list) =
     let input_number memref =
         try  let number = Etc.read_number ()
-             in interp_let memref number
-             (* (print_float number; print_newline (); print_string (Dumper.string_of_memref(memref)); print_newline ()) *) 
+             in (if number==nan then Etc.die ["Bad input: expected a number"]; interp_let memref number)
+              (*print_string (Dumper.string_of_memref(memref)); print_newline ())  *)
              (* (print_float number; print_newline ()) *)
         with End_of_file ->
              (print_string "End_of_file"; print_newline ())
+        | Stack_overflow ->  (print_string "bad input")
     in List.iter input_number memref_list
 
 
