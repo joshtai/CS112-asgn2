@@ -7,14 +7,6 @@ let unimpl reason = raise (Unimplemented reason)
 
 let want_dump = ref false
 
-(*----- TODO -----
-Need to fix if statement to handle variables
-Input might need to be fixed also but not sure where the problem is
-Use dumper to find
-
-It seems like its not being saved into the variable table
-----------------*)
-
 (* ----- COMPARISON OPEARTORS TBL ----- *)
 type comparison_fn_tbl_t = (string, float -> float -> bool) Hashtbl.t
 let comparison_fn_tbl : comparison_fn_tbl_t = Hashtbl.create 16
@@ -44,11 +36,11 @@ let comparisonOp (op : Absyn.oper) val1 val2 : bool =
 let rec eval_expr (expr : Absyn.expr) : float = match expr with
     | Number number -> number
     | Memref memref -> (match memref with
-                        | Arrayref (ident, expr) ->
-                            let idx = eval_expr(expr) in
-                                let getArray = Hashtbl.find Tables.array_table ident in
-                                    getArray.(int_of_float(idx))
-                        | Variable ident -> Hashtbl.find Tables.variable_table ident)
+        | Arrayref (ident, expr) ->
+            let idx = eval_expr(expr) in
+            let getArray = Hashtbl.find Tables.array_table ident in
+                getArray.(int_of_float(idx))
+        | Variable ident -> Hashtbl.find Tables.variable_table ident)
     | Unary (oper, expr) -> 
         let calculatedExpr = eval_expr(expr) in 
             unaryOp oper calculatedExpr
@@ -70,8 +62,8 @@ let rec eval_if (expr : Absyn.expr) : bool = match expr with
 let interp_let (mem_ref : Absyn.memref) val1 = match mem_ref with
     | Arrayref (ident, expr) -> 
         let idx = eval_expr(expr) in
-            let getArray = Hashtbl.find Tables.array_table ident in
-                getArray.(int_of_float(idx)) <- val1
+        let getArray = Hashtbl.find Tables.array_table ident in
+            getArray.(int_of_float(idx)) <- val1
     | Variable ident -> Hashtbl.add Tables.variable_table ident val1;;
 
 let interp_dim ident val1 = 
@@ -95,7 +87,8 @@ let interp_print (print_list : Absyn.printable list) =
 let interp_input (memref_list : Absyn.memref list) =
     let input_number memref =
         try  let number = Etc.read_number ()
-             in (print_float number; print_newline (); print_string(Dumper.string_of_memref(memref)); print_newline ())
+             in interp_let memref number
+             (* (print_float number; print_newline (); print_string (Dumper.string_of_memref(memref)); print_newline ()) *) 
              (* (print_float number; print_newline ()) *)
         with End_of_file ->
              (print_string "End_of_file"; print_newline ())
@@ -119,15 +112,15 @@ let rec interpret (program : Absyn.program) = match program with
     | firstline::otherlines -> match firstline with
       | _, _, None -> interpret otherlines
       | _, _, Some stmt ->  match stmt with
-                            | Goto labsl -> 
-                                let goto_program = Hashtbl.find Tables.label_table labsl in
-                                    interpret goto_program;
-                            | If (expr, label) ->
-                                let if_taken = if eval_if expr 
-                                                    then Hashtbl.find Tables.label_table label
-                                                else otherlines 
-                                                in interpret if_taken
-                            | _ -> interp_stmt stmt; interpret otherlines
+        | Goto labsl -> 
+            let goto_program = Hashtbl.find Tables.label_table labsl in
+                interpret goto_program;
+        | If (expr, label) ->
+            let if_taken = if eval_if expr 
+                then Hashtbl.find Tables.label_table label
+                else otherlines 
+                in interpret if_taken
+        | _ -> interp_stmt stmt; interpret otherlines
 
 (*interp_stmt stmt; interpret otherlines*)
 let interpret_program program =
