@@ -39,7 +39,7 @@ let rec eval_expr (expr : Absyn.expr) : float = match expr with
         | Arrayref (ident, expr) ->
             let idx = eval_expr(expr) in
             let getArray = Hashtbl.find Tables.array_table ident in
-                getArray.(int_of_float(idx))
+                getArray.(int_of_float(idx) - 1)
         | Variable ident -> Hashtbl.find Tables.variable_table ident)
     | Unary (oper, expr) -> 
         let calculatedExpr = eval_expr(expr) in 
@@ -63,7 +63,7 @@ let interp_let (mem_ref : Absyn.memref) val1 = match mem_ref with
     | Arrayref (ident, expr) -> 
         let idx = eval_expr(expr) in
         let getArray = Hashtbl.find Tables.array_table ident in
-            getArray.(int_of_float(idx)) <- val1
+            getArray.(int_of_float(idx) - 1) <- val1
     | Variable ident -> Hashtbl.add Tables.variable_table ident val1
 
 let interp_dim ident val1 = 
