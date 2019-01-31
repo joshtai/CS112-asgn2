@@ -7,32 +7,17 @@ let unimpl reason = raise (Unimplemented reason)
 
 let want_dump = ref false
 
-(* ----- COMPARISON OPEARTORS TBL ----- *)
-type comparison_fn_tbl_t = (string, float -> float -> bool) Hashtbl.t
-let comparison_fn_tbl : comparison_fn_tbl_t = Hashtbl.create 16
-let _ = List.map (fun (label, value) ->
-                  Hashtbl.add comparison_fn_tbl label value)
-                 ["="  , (=);
-                  ">", (>);
-                  "<" , (<);
-                  "<=", (<=);
-                  ">=", (>=);
-                  "<>", (<>)]
-(* -------------------------------- *)
-
 (*----- BINARY OPERATOR -----*)
 let binOp (op : Absyn.oper) val1 val2 : float =
     Hashtbl.find Tables.binary_fn_table op val1 val2;;
-
 (*----- UNARY OPERATOR -----*)
 let unaryOp (op : Absyn.oper) val1 : float =
     Hashtbl.find Tables.unary_fn_table op val1;;
-    
 (*----- COMPARISON OP FOR IF STATEMENT ------*)
 let comparisonOp (op : Absyn.oper) val1 val2 : bool =
-    Hashtbl.find comparison_fn_tbl op val1 val2;;
-
+    Hashtbl.find Tables.comparison_fn_tbl op val1 val2;;
 (* -------------------------------- *)
+
 let rec eval_expr (expr : Absyn.expr) : float = match expr with
     | Number number -> number
     | Memref memref -> (match memref with
@@ -68,7 +53,9 @@ let interp_let (mem_ref : Absyn.memref) val1 = match mem_ref with
 
 let interp_dim ident val1 = 
     let newArr = Array.make val1 0.0 in
-        Hashtbl.add Tables.array_table ident newArr;;
+        Hashtbl.add Tables.array_table ident newArr
+
+(*let interp_goto labsl*)
 (* --------------------------------- *)
 
 let interp_print (print_list : Absyn.printable list) =
@@ -87,7 +74,8 @@ let interp_print (print_list : Absyn.printable list) =
 let interp_input (memref_list : Absyn.memref list) =
     let input_number memref =
         try  let number = Etc.read_number ()
-             in (if number==nan then Etc.die ["Bad input: expected a number"]; interp_let memref number)
+             in (if number == nan then Etc.die ["Bad input: expected a number"]; 
+                interp_let memref number)
         with End_of_file ->
              Hashtbl.replace Tables.variable_table "eof" 1.0
              (*in interp_let memref number;*)

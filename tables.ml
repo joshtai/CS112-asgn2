@@ -6,6 +6,19 @@ type unary_fn_table_t = (string, float -> float) Hashtbl.t
 type binary_fn_table_t = (string, float -> float -> float) Hashtbl.t
 type label_table_t = (string, Absyn.program) Hashtbl.t
 
+(* ----- COMPARISON OPEARTORS TBL ----- *)
+type comparison_fn_tbl_t = (string, float -> float -> bool) Hashtbl.t
+let comparison_fn_tbl : comparison_fn_tbl_t = Hashtbl.create 16
+let _ = List.map (fun (label, value) ->
+                    Hashtbl.add comparison_fn_tbl label value)
+                     ["="  , (=);
+                      ">", (>);
+                      "<" , (<);
+                      "<=", (<=);
+                      ">=", (>=);
+                      "<>", (<>)]
+(* -------------------------------- *)
+
 let variable_table : variable_table_t = Hashtbl.create 16
 let _ = List.map (fun (label, value) ->
                   Hashtbl.add variable_table label value)
@@ -65,3 +78,4 @@ let dump_label_table () =
           Printf.fprintf stderr
               "label_table: \"%s\" -> line %d\n%!" key line
     in Hashtbl.iter dump label_table
+
