@@ -3,3 +3,5 @@
 *.cmo
 .DS_Store
 .vscode
+*.log
+
