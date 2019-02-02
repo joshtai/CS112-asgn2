@@ -17,7 +17,6 @@ let unaryOp (op : Absyn.oper) val1 : float =
 let comparisonOp (op : Absyn.oper) val1 val2 : bool =
     Hashtbl.find Tables.comparison_fn_tbl op val1 val2;;
 (* -------------------------------- *)
-
 let rec eval_expr (expr : Absyn.expr) : float = match expr with
     | Number number -> number
     | Memref memref -> (match memref with
@@ -30,11 +29,9 @@ let rec eval_expr (expr : Absyn.expr) : float = match expr with
         let calculatedExpr = eval_expr(expr) in 
             unaryOp oper calculatedExpr
     | Binary (oper, expr1, expr2) ->
-        (* print_string (Dumper.string_of_expr(expr)); *)
         let v1 = eval_expr(expr1) in
         let v2 = eval_expr(expr2) in
             binOp oper v1 v2
-
 (* ------ IF Statement Helper Fn -----*)
 let rec eval_if (expr : Absyn.expr) : bool = match expr with
     | Binary (oper, expr1, expr2) ->
@@ -42,7 +39,6 @@ let rec eval_if (expr : Absyn.expr) : bool = match expr with
         let v2 = eval_expr(expr2) in 
             comparisonOp oper v1 v2
     | _ -> false
-
 (*------- INTERPRET FUNCTIONS -------*)
 let interp_let (mem_ref : Absyn.memref) val1 = match mem_ref with
     | Arrayref (ident, expr) -> 
@@ -50,12 +46,14 @@ let interp_let (mem_ref : Absyn.memref) val1 = match mem_ref with
         let getArray = Hashtbl.find Tables.array_table ident in
             getArray.(int_of_float(idx) - 1) <- val1
     | Variable ident -> Hashtbl.add Tables.variable_table ident val1
-
 let interp_dim ident val1 = 
     let newArr = Array.make val1 0.0 in
         Hashtbl.add Tables.array_table ident newArr
-
-(*let interp_goto labsl*)
+(* ------- PLACE HOLDER FNS -------*)
+(* Goto statement is completed inside the interpret function *)
+let interp_goto labsl = print_string ""
+(* If statement is completed inside the interpret function *)
+let interp_if expr label = print_string ""
 (* --------------------------------- *)
 
 let interp_print (print_list : Absyn.printable list) =
@@ -66,8 +64,6 @@ let interp_print (print_list : Absyn.printable list) =
            let regex = Str.regexp "\"\\(.*\\)\""
            in print_string (Str.replace_first regex "\\1" string)
          | Printexpr expr ->
-           (*print_string (exp_to_string expr);*)
-           (*print_endline("");*)
            print_float (eval_expr expr))
     in (List.iter print_item print_list; print_newline ())
 
@@ -81,7 +77,6 @@ let interp_input (memref_list : Absyn.memref list) =
              (*in interp_let memref number;*)
     in List.iter input_number memref_list
 
-
 let interp_stmt (stmt : Absyn.stmt) = match stmt with
     | Dim (ident, expr) -> 
         let val1 = eval_expr(expr) in
@@ -89,8 +84,8 @@ let interp_stmt (stmt : Absyn.stmt) = match stmt with
     | Let (memref, expr) -> 
         let val1 = eval_expr(expr) in 
             interp_let memref val1
-    | Goto labsl ->  print_string "";
-    | If (expr, label) -> print_string "";
+    | Goto labsl -> interp_goto labsl
+    | If (expr, label) -> interp_if expr label
     | Print print_list -> interp_print print_list
     | Input memref_list -> interp_input memref_list
 
@@ -109,7 +104,6 @@ let rec interpret (program : Absyn.program) = match program with
                 in interpret if_taken
         | _ -> interp_stmt stmt; interpret otherlines
 
-(*interp_stmt stmt; interpret otherlines*)
 let interpret_program program =
     (Tables.init_label_table program;
      (*Dumper.dump_program(Hashtbl.find Tables.label_table "zero");*)
