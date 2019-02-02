@@ -1,5 +1,8 @@
 (* $Id: tables.ml,v 1.4 2019-01-25 14:55:20-08 - - $ *)
-
+(*
+  Joseph Nguyen (jnguy243)
+  Joshua Tai
+*)
 type variable_table_t = (string, float) Hashtbl.t
 type array_table_t = (string, float array) Hashtbl.t
 type unary_fn_table_t = (string, float -> float) Hashtbl.t

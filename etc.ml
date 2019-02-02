@@ -1,5 +1,8 @@
 (* $Id: etc.ml,v 1.2 2019-01-25 15:10:01-08 - - $ *)
-
+(*
+  Joseph Nguyen (jnguy243)
+  Joshua Tai
+*)
 let execname = Filename.basename Sys.argv.(0)
 
 let exit_status_ref = ref 0

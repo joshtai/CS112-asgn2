@@ -1,3 +1,7 @@
+(*
+  Joseph Nguyen (jnguy243)
+  Joshua Tai
+*)
 type token =
   | RELOP of (string)
   | EQUAL of (string)

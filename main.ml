@@ -1,5 +1,8 @@
 (* $Id: main.ml,v 1.1 2019-01-24 15:47:38-08 - - $ *)
-
+(*
+  Joseph Nguyen (jnguy243)
+  Joshua Tai
+*)
 (*
 * Main program reads a file and prints to stdout.
 *)

@@ -1,4 +1,4 @@
-# 3 "scanner.mll"
+# 6 "scanner.mll"
  
 
 let lexerror lexbuf =
@@ -583,162 +583,162 @@ let rec token lexbuf =
 and __ocaml_lex_token_rec lexbuf __ocaml_lex_state =
   match Lexing.engine __ocaml_lex_tables __ocaml_lex_state lexbuf with
       | 0 ->
-# 32 "scanner.mll"
+# 35 "scanner.mll"
                     ( Parser.EOF )
 # 589 "scanner.ml"
 
   | 1 ->
-# 33 "scanner.mll"
+# 36 "scanner.mll"
                     ( token lexbuf )
 # 594 "scanner.ml"
 
   | 2 ->
-# 34 "scanner.mll"
+# 37 "scanner.mll"
                     ( token lexbuf )
 # 599 "scanner.ml"
 
   | 3 ->
-# 35 "scanner.mll"
+# 38 "scanner.mll"
                     ( newline lexbuf; Parser.EOL )
 # 604 "scanner.ml"
 
   | 4 ->
-# 36 "scanner.mll"
+# 39 "scanner.mll"
                     ( Parser.COLON )
 # 609 "scanner.ml"
 
   | 5 ->
-# 37 "scanner.mll"
+# 40 "scanner.mll"
                     ( Parser.COMMA )
 # 614 "scanner.ml"
 
   | 6 ->
-# 38 "scanner.mll"
+# 41 "scanner.mll"
                     ( Parser.LPAR )
 # 619 "scanner.ml"
 
   | 7 ->
-# 39 "scanner.mll"
+# 42 "scanner.mll"
                     ( Parser.RPAR )
 # 624 "scanner.ml"
 
   | 8 ->
-# 40 "scanner.mll"
+# 43 "scanner.mll"
                     ( Parser.LSUB )
 # 629 "scanner.ml"
 
   | 9 ->
-# 41 "scanner.mll"
+# 44 "scanner.mll"
                     ( Parser.RSUB )
 # 634 "scanner.ml"
 
   | 10 ->
-# 42 "scanner.mll"
+# 45 "scanner.mll"
                     ( Parser.EQUAL (lexeme lexbuf) )
 # 639 "scanner.ml"
 
   | 11 ->
-# 43 "scanner.mll"
+# 46 "scanner.mll"
                     ( Parser.RELOP (lexeme lexbuf) )
 # 644 "scanner.ml"
 
   | 12 ->
-# 44 "scanner.mll"
+# 47 "scanner.mll"
                     ( Parser.RELOP (lexeme lexbuf) )
 # 649 "scanner.ml"
 
   | 13 ->
-# 45 "scanner.mll"
+# 48 "scanner.mll"
                     ( Parser.RELOP (lexeme lexbuf) )
 # 654 "scanner.ml"
 
   | 14 ->
-# 46 "scanner.mll"
+# 49 "scanner.mll"
                     ( Parser.RELOP (lexeme lexbuf) )
 # 659 "scanner.ml"
 
   | 15 ->
-# 47 "scanner.mll"
+# 50 "scanner.mll"
                     ( Parser.RELOP (lexeme lexbuf) )
 # 664 "scanner.ml"
 
   | 16 ->
-# 48 "scanner.mll"
+# 51 "scanner.mll"
                     ( Parser.ADDOP (lexeme lexbuf) )
 # 669 "scanner.ml"
 
   | 17 ->
-# 49 "scanner.mll"
+# 52 "scanner.mll"
                     ( Parser.ADDOP (lexeme lexbuf) )
 # 674 "scanner.ml"
 
   | 18 ->
-# 50 "scanner.mll"
+# 53 "scanner.mll"
                     ( Parser.MULOP (lexeme lexbuf) )
 # 679 "scanner.ml"
 
   | 19 ->
-# 51 "scanner.mll"
+# 54 "scanner.mll"
                     ( Parser.MULOP (lexeme lexbuf) )
 # 684 "scanner.ml"
 
   | 20 ->
-# 52 "scanner.mll"
+# 55 "scanner.mll"
                     ( Parser.MULOP (lexeme lexbuf) )
 # 689 "scanner.ml"
 
   | 21 ->
-# 53 "scanner.mll"
+# 56 "scanner.mll"
                     ( Parser.POWOP (lexeme lexbuf) )
 # 694 "scanner.ml"
 
   | 22 ->
-# 54 "scanner.mll"
+# 57 "scanner.mll"
                     ( Parser.DIM )
 # 699 "scanner.ml"
 
   | 23 ->
-# 55 "scanner.mll"
+# 58 "scanner.mll"
                     ( Parser.GOTO )
 # 704 "scanner.ml"
 
   | 24 ->
-# 56 "scanner.mll"
+# 59 "scanner.mll"
                     ( Parser.IF )
 # 709 "scanner.ml"
 
   | 25 ->
-# 57 "scanner.mll"
+# 60 "scanner.mll"
                     ( Parser.INPUT )
 # 714 "scanner.ml"
 
   | 26 ->
-# 58 "scanner.mll"
+# 61 "scanner.mll"
                     ( Parser.LET )
 # 719 "scanner.ml"
 
   | 27 ->
-# 59 "scanner.mll"
+# 62 "scanner.mll"
                     ( Parser.PRINT )
 # 724 "scanner.ml"
 
   | 28 ->
-# 60 "scanner.mll"
+# 63 "scanner.mll"
                     ( Parser.NUMBER (lexeme lexbuf) )
 # 729 "scanner.ml"
 
   | 29 ->
-# 61 "scanner.mll"
+# 64 "scanner.mll"
                     ( Parser.STRING (lexeme lexbuf) )
 # 734 "scanner.ml"
 
   | 30 ->
-# 62 "scanner.mll"
+# 65 "scanner.mll"
                     ( Parser.IDENT (lexeme lexbuf) )
 # 739 "scanner.ml"
 
   | 31 ->
-# 63 "scanner.mll"
+# 66 "scanner.mll"
                     ( lexerror lexbuf; token lexbuf )
 # 744 "scanner.ml"
 

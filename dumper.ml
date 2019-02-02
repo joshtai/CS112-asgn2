@@ -1,5 +1,9 @@
 (* $Id: dumper.ml,v 1.15 2019-01-25 17:43:51-08 - - $ *)
 
+(*
+  Joseph Nguyen (jnguy243)
+  Joshua Tai
+*)
 let quote string =
   let regex = Str.regexp "\""
   and subst _ = "\\\""
