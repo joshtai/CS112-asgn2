@@ -1,7 +1,7 @@
 (* $Id: etc.mli,v 1.1 2019-01-24 15:47:38-08 - - $ *)
 (*
   Joseph Nguyen (jnguy243)
-  Joshua Tai
+  Joshua Tai (jitai)
 *)
 (*
 * Main program and system access.

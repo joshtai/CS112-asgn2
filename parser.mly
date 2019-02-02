@@ -1,5 +1,8 @@
 /* $Id: parser.mly,v 1.2 2019-01-25 16:49:38-08 - - $ */
-
+(*
+  Joseph Nguyen (jnguy243)
+  Joshua Tai (jitai)
+*)
 %{
 
 let linenr () = (symbol_start_pos ()).Lexing.pos_lnum

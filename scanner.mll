@@ -1,7 +1,7 @@
 (* $Id: scanner.mll,v 1.1 2019-01-18 11:49:38-08 - - $ *)
 (*
   Joseph Nguyen (jnguy243)
-  Joshua Tai
+  Joshua Tai (jitai)
 *)
 {
 
@@ -64,4 +64,3 @@ rule token     = parse
     | string        { Parser.STRING (lexeme lexbuf) }
     | ident         { Parser.IDENT (lexeme lexbuf) }
     | _             { lexerror lexbuf; token lexbuf }
-

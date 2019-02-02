@@ -1,5 +1,8 @@
 # $Id: Makefile,v 1.8 2019-01-25 16:48:22-08 - - $
-
+#
+#  Joseph Nguyen (jnguy243)
+#  Joshua Tai (jitai)
+#
 #
 # General useful macros
 #
@@ -66,7 +69,7 @@ clean :
 	- rm ${OBJCMI} ${OBJCMO} ${OBJBIN} ${GENSOURCE}
 
 spotless : clean
-	- rm ${EXECBIN} ${GENFILES} ${LISTING} ${LISTING:.ps=.pdf} 
+	- rm ${EXECBIN} ${GENFILES} ${LISTING} ${LISTING:.ps=.pdf}
 
 ci : ${ALLSOURCES}
 	- checksource ${ALLSOURCES}

@@ -1,7 +1,7 @@
 (* $Id: etc.ml,v 1.2 2019-01-25 15:10:01-08 - - $ *)
 (*
   Joseph Nguyen (jnguy243)
-  Joshua Tai
+  Joshua Tai (jitai)
 *)
 let execname = Filename.basename Sys.argv.(0)
 

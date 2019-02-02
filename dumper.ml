@@ -2,7 +2,7 @@
 
 (*
   Joseph Nguyen (jnguy243)
-  Joshua Tai
+  Joshua Tai (jitai)
 *)
 let quote string =
   let regex = Str.regexp "\""

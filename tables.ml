@@ -1,7 +1,7 @@
 (* $Id: tables.ml,v 1.4 2019-01-25 14:55:20-08 - - $ *)
 (*
   Joseph Nguyen (jnguy243)
-  Joshua Tai
+  Joshua Tai (jitai)
 *)
 type variable_table_t = (string, float) Hashtbl.t
 type array_table_t = (string, float array) Hashtbl.t
@@ -81,4 +81,3 @@ let dump_label_table () =
           Printf.fprintf stderr
               "label_table: \"%s\" -> line %d\n%!" key line
     in Hashtbl.iter dump label_table
-

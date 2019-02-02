@@ -1,6 +1,6 @@
 (*
   Joseph Nguyen (jnguy243)
-  Joshua Tai
+  Joshua Tai (jitai)
 *)
 type token =
   | RELOP of (string)

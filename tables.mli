@@ -1,4 +1,8 @@
 (* Generated: Fri Feb  1 16:11:32 PST 2019 *)
+(*
+  Joseph Nguyen (jnguy243)
+  Joshua Tai (jitai)
+*)
 type variable_table_t = (string, float) Hashtbl.t
 type array_table_t = (string, float array) Hashtbl.t
 type unary_fn_table_t = (string, float -> float) Hashtbl.t

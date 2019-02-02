@@ -1,5 +1,9 @@
+(*
+  Joseph Nguyen (jnguy243)
+  Joshua Tai (jitai)
+*)
 # 6 "scanner.mll"
- 
+
 
 let lexerror lexbuf =
     Etc.syntax_error (Lexing.lexeme_start_p lexbuf)
@@ -746,4 +750,3 @@ and __ocaml_lex_token_rec lexbuf __ocaml_lex_state =
       __ocaml_lex_token_rec lexbuf __ocaml_lex_state
 
 ;;
-

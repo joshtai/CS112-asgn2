@@ -1,4 +1,8 @@
 (* Generated: Fri Feb  1 16:11:33 PST 2019 *)
+(*
+  Joseph Nguyen (jnguy243)
+  Joshua Tai (jitai)
+*)
 val quote : string -> string
 val join : string -> string -> string -> string list -> string
 val string_of_option : ('a -> string) -> 'a option -> string

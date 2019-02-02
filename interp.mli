@@ -1,7 +1,7 @@
 (* $Id: interp.mli,v 1.5 2019-01-24 17:08:37-08 - - $ *)
 (*
   Joseph Nguyen (jnguy243)
-  Joshua Tai
+  Joshua Tai (jitai)
 *)
 (*
 * Interpreter for Silly Basic
