@@ -73,8 +73,9 @@ let interp_print (print_list : Absyn.printable list) =
 let interp_input (memref_list : Absyn.memref list) =
     let input_number memref =
         try  let number = Etc.read_number ()
-             in (if number == nan then Etc.die ["Bad input: expected a number"];
-                interp_let memref number)
+             in if number == nan then 
+                Etc.die ["Bad input: expected a number"];
+                interp_let memref number
         with End_of_file ->
              Hashtbl.replace Tables.variable_table "eof" 1.0
              (*in interp_let memref number;*)
